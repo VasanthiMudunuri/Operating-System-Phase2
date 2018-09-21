@@ -1,8 +1,3 @@
-/* Name             : Vasanthi Mudunuri
-   Course Number    : CS5323
-   Assignment Title : Phase-2
-   Date             : 04-03-2018
-*/
 /*
 SYSTEM class :
 It is the main class that has the control of execution of entire project.
