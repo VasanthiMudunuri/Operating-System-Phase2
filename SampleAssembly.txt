@@ -1,0 +1,69 @@
+0 SWAP   :PUSH HOLD     restore original value
+1         BR FIRST      shift left 4 bits
+2 LOOP   :ADD ONE
+3         POP INDEX
+4 FIRST  :SL
+5         PUSH INDEX
+6         CPL FOUR
+7         BRT LOOP
+8         POP INDEX
+9         POP TEMP
+10        RTN           return
+11 START :RD            get value
+12        POP HOLD      save it
+13        PUSH HOLD     restore it
+14        CPG ZERO      if less than zero
+15        BRF M2        use method 2
+16 M1    :AND RIGHT     leave rightmost digit unmasked
+17        PUSH TABLE    get a value from table
+18        POP ANS       save the change
+19        CALL SWAP     change second digit
+20        PUSH TEMP     restore change value
+21        AND MID       leave middle digit unmasked
+22        ADD ANS       add it to the answer
+23        POP ANS       save it
+24        PUSH HOLD     restore original value
+25        AND LEFT      leave left digit unmasked
+26        NOT           complement
+27        AND LEFT      mask out again
+28        ADD ANS       include in answer
+29        POP ANS       save it
+30        PUSH HOLD     restore original value
+31        AND REST      leave two leftmost digits
+32        NOT           complement
+33        AND REST      maks out again
+34        ADD ANS       include in answer
+35        BR WRITE
+36 M2    :CALL SWAP
+37        PUSH TEMP
+38 WRITE :PUSH HOLD
+39        WR             original value
+40        WR             encrypted value
+41        HLT
+42 ZERO  0000
+43 ONE   0001
+44 FOUR  0004
+45 ANS   0000
+46 HOLD  0000
+47 INDEX 0001
+48 TEMP  0000
+49 RIGHT 000F
+50 MID   00F0
+51 LEFT  0F00
+52 REST  3000
+53 TABLE 000A
+54       0003
+55       0006
+56       0008
+57       000B
+58       0002
+59       000D
+60       000F
+61       0001
+62       0004
+63       0005
+64       000E
+65       000C
+66       0007
+67       0009
+68       0000

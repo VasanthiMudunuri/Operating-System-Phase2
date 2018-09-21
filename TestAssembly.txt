@@ -1,0 +1,31 @@
+0 START  :RD                   get number
+1         POP NUMBER           save it
+2         PUSH NUMBER          restore it
+3         CPL ZERO             if less than zero
+4         BRT END              halt 
+5         CPE ZERO             if equal to zero
+6         BRT WRITE            write 1
+7         CPE ONE              if equal to one
+8         BRT WRITE            write 1
+9         POP TEMP             save to temp
+10        PUSH NUMBER          restore number
+11        PUSH TEMP            restore temp
+12 LOOP  :SUB ONE              decrement temp by 1
+13        POP TEMP             save temp
+14        PUSH TEMP            restore it
+15        MUL                  multiply
+16        POP RESULT           save to result
+17        PUSH RESULT          restore it
+18        PUSH TEMP            restore temp
+19        CPE ONE              if equal to one
+20        BRF LOOP             false then loop again
+21 WRITE :PUSH RESULT          restore result
+22        PUSH NUMBER          restore number
+23        WR                   write number 
+24        WR                   write result
+25 END   :HLT                  halt
+26 NUMBER 0000
+27 ZERO   0000
+28 ONE    0001
+29 TEMP   0000
+30 RESULT 0001
